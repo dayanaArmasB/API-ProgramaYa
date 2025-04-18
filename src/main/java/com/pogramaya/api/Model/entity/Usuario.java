@@ -1,10 +1,14 @@
 package com.pogramaya.api.Model.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -12,7 +16,7 @@ import lombok.Data;
 @Data
 @Table(name = "usuarios")
 public class Usuario {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
@@ -26,6 +30,10 @@ public class Usuario {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "rol")
-    private String rol; // "ESTUDIANTE" o "ADMIN"
+    @ManyToOne
+    @JoinColumn(name = "rol_id")
+    private Rol rol;
+
+    @Column(name = "fecha_registro")
+    private LocalDate fechaRegistro;
 }
